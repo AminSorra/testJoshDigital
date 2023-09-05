@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles index{% endblock %}
+
+{% block body %}
+    <h1 class="index">Post récent</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Contenu</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content }}</td>
+                <td class = "action">
+                    <a class="btn-action" href="{{ path('app_articles_show', {'id': article.id}) }}">Ouvrir</a>
+                    <a class="btn-action" href="{{ path('app_articles_edit', {'id': article.id}) }}">Modifier</a>
+                    {{ include('articles/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune publication</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+
+    <a href="{{ path('app_articles_new') }}">Nouvelle publication</a>
+{% endblock %}
